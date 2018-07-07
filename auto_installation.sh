@@ -35,7 +35,7 @@ fi
 #########################################################################################################
 #---------------- Download Google-Chrome ----------------------------------------------------------------
 printf "${LIGHT_BLUE}Downloading google-chrome-stable_current_amd64.deb\n${NC}"
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+wget -c --retry-connrefused --tries=0 --timeout=5 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #---------------- Install Google-Chrome -----------------------------------------------------------------
 if dpkg -i --force-all google-chrome-stable_current_amd64.deb ; then 
 	printf "${LIGHT_GREEN}Google-Chrome has been installed successfully.\n${NC}"
@@ -65,7 +65,7 @@ fi
 #########################################################################################################
 #---------------- Download Atom -------------------------------------------------------------------------
 printf "${LIGHT_BLUE}Downloading atom-amd64.deb\n${NC}"
-wget https://atom.io/download/deb
+wget -c --retry-connrefused --tries=0 --timeout=5 https://atom.io/download/deb
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
 if apt-get -y install atom-amd64.deb ; then
 	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n${NC}"
@@ -86,7 +86,7 @@ then
 	printf "${LIGHT_BLUE}Old rstudio-xenial-1.1.453-amd64.deb has been deleted.\n${NC}"
 fi
 
-wget https://download1.rstudio.org/rstudio-xenial-1.1.453-amd64.deb
+wget -c --retry-connrefused --tries=0 --timeout=5 https://download1.rstudio.org/rstudio-xenial-1.1.453-amd64.deb
 
 # Check integrity of rstudio-package
 CHECKSUM_REFRENCE="85b3e76c9fad4613bc9cf0de1f34b183"
