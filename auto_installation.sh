@@ -17,82 +17,82 @@ LIGHT_BLUE='\033[1;34m'
 LIGHT_PURPLE='\033[1;35m'
 LIGHT_CYAN='\033[1;36m'
 WHITE='\033[1;37m'
-
+NC='\033[0m'
 #-------- Refresh software list as it may be an old distro --------------------------------------------
 if sed 's/# deb/deb/' -i /etc/apt/sources.list ; then
-	printf "${LIGHT_GREEN}Done.\n"'"/etc/apt/sources.list"'" has been refreshed.\n"
+	printf "${LIGHT_GREEN}Done. "'"/etc/apt/sources.list"'" has been refreshed.\n${NC}"
 else
-	printf "${RED}Failed to refresh /etc/apt/sources.list"
+	printf "${RED}Failed to refresh /etc/apt/sources.list.\n${NC}"
 fi
 #########################################################################################################
 
 #---------- update repositories -------------------------------------------------------------------------
 if apt-get update ; then
-	printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
+	printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n${NC}"
 else
-	printf "FAILURE: apt-get update failed.\n"
+	printf "${RED}FAILURE: apt-get update failed.\n${NC}"
 fi
 #########################################################################################################
 #---------------- Download Google-Chrome ----------------------------------------------------------------
-printf "Downloading google-chrome-stable_current_amd64.deb\n"
+printf "${LIGHT_BLUE}Downloading google-chrome-stable_current_amd64.deb\n${NC}"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #---------------- Install Google-Chrome -----------------------------------------------------------------
 if dpkg -i --force-all google-chrome-stable_current_amd64.deb ; then 
-	printf "${LIGHT_GREEN}Google-Chrome has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Google-Chrome has been installed successfully.\n${NC}"
 else
-	printf "FAILURE: Failed to install google-chrome-stable_current_amd64.deb\n"
+	printf "${RED}FAILURE: Failed to install google-chrome-stable_current_amd64.deb\n${NC}"
 fi
 #########################################################################################################
 #---------------- Install Python3.6 ---------------------------------------------------------------------
 if apt-get -y install python3.6 ; then 
-	printf "${LIGHT_GREEN}Done. python3.6 has been successfully installed.\n"
+	printf "${LIGHT_GREEN}Done. python3.6 has been successfully installed.\n${NC}"
 else
-	printf "FAILURE: Failed to install python3.6\n"
+	printf "${RED}FAILURE: Failed to install python3.6\n${NC}"
 fi
 #########################################################################################################
 #---------------- Update Repositories -------------------------------------------------------------------
 if apt-get update ; then
-        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
+        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n${NC}"
 else
-        printf "FAILURE: apt-get update failed.\n"
+        printf "${RED}FAILURE: apt-get update failed.\n${NC}"
 fi
 #---------------- Install Pycharm -----------------------------------------------------------------------
 if snap install pycharm-community --classic ; then 
-	printf "${LIGHT_GREEN}Done. pycharm-community has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. pycharm-community has been installed successfully.\n${NC}"
 else
-	printf "FAILURE: Failed to install pycharm-community.\n"
+	printf "${RED}FAILURE: Failed to install pycharm-community.\n${NC}"
 fi
 #########################################################################################################
 #---------------- Add Atom PPA --------------------------------------------------------------------------
 if apt-get install pycharm-community ; then 
-	printf "${LIGHT_GREEN}Atom PPA ha been added.\n"
+	printf "${LIGHT_GREEN}Atom PPA ha been added.\n${NC}"
 else
-	printf "FAILURE: Failed to add atom PPA.\n"
+	printf "${RED}FAILURE: Failed to add atom PPA.\n${NC}"
 fi
 #---------------- Update Repositories -------------------------------------------------------------------
 if apt-get update ; then
-        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
+        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n${NC}"
 else
-        printf "FAILURE: apt-get update failed.\n"
+        printf "${RED}FAILURE: apt-get update failed.\n${NC}"
 fi
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
 if apt-get -y install atom ; then
-	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n${NC}"
 else
-	printf "FAILURE: Failed to install atom.\n"
+	printf "${RED}FAILURE: Failed to install atom.\n${NC}"
 fi
 #########################################################################################################
 #---------------- Install R -----------------------------------------------------------------------------
 if apt-get install r-base ; then
-	printf "${LIGHT_GREEN}Done. R has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. R has been installed successfully.\n${NC}"
 else 
-	printf "FAILURE: apt-get install r-base failed.\n"
+	printf "${RED}FAILURE: apt-get install r-base failed.\n${NC}"
 fi
 #------------------ Download Rstudio ---------------------------------------------------------------------
 if [ -e rstudio-xenial-1.1.453-amd64.deb ]
 then
 	rm rstudio-xenial-1.1.453-amd64.deb;
-	printf "Old rstudio-xenial-1.1.453-amd64.deb has been deleted.\n"
+	printf "${LIGHT_BLUE}Old rstudio-xenial-1.1.453-amd64.deb has been deleted.\n${NC}"
 fi
 
 wget https://download1.rstudio.org/rstudio-xenial-1.1.453-amd64.deb
@@ -113,7 +113,7 @@ then
 fi
 #------------------- Fix missed dependencies -----------------------------------------------------------
 if apt-get -f install ; then 
-	printf "${LIGHT_GREEN}Done. Rstudio has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. Rstudio has been installed successfully.\n${NC}"
 fi
 
 #------------------- Remove un-necessary packages --------------------------------------------------------
