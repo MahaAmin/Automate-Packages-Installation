@@ -56,9 +56,6 @@ if apt-get update ; then
 else
         printf "${RED}FAILURE: apt-get update failed.\n${NC}"
 fi
-#---------------- Download Pycharm ----------------------------------------------------------------------
-printf "${LIGHT_BLUE}Downloading pycharm-community.\n${NC}"
-wget -c --retry-connrefused --tries=0 --timeout=5 https://download.jetbrains.com/python/pycharm-community-2018.1.4.tar.gz
 #---------------- Install Pycharm -----------------------------------------------------------------------
 if snap install pycharm-community --classic ; then 
 	printf "${LIGHT_GREEN}Done. pycharm-community has been installed successfully.\n${NC}"
@@ -66,18 +63,21 @@ else
 	printf "${RED}FAILURE: Failed to install pycharm-community.\n${NC}"
 fi
 #########################################################################################################
-#---------------- Download Atom -------------------------------------------------------------------------
-printf "${LIGHT_BLUE}Downloading atom-amd64.deb\n${NC}"
-wget -c --retry-connrefused --tries=0 --timeout=5 https://atom.io/download/deb
+#---------------- Add Atom PPA --------------------------------------------------------------------------
+if add-apt-repository ppa:webupd8team/atom ; then 
+	printf "${LIGHT_GREEN}Atom PPA has been added successfully.\n${NC}"
+else
+	printf "${RED}FAILURE: Failed to add Atom PPA.\n${NC}"
+fi
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
-if apt-get -y install deb ; then
+if apt-get -y install atom ; then
 	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n${NC}"
 else
 	printf "${RED}FAILURE: Failed to install atom.\n${NC}"
 fi
 #########################################################################################################
 #---------------- Install R -----------------------------------------------------------------------------
-if apt-get install r-base ; then
+if apt-get -y install r-base ; then
 	printf "${LIGHT_GREEN}Done. R has been installed successfully.\n${NC}"
 else 
 	printf "${RED}FAILURE: apt-get install r-base failed.\n${NC}"
