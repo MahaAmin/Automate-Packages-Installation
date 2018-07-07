@@ -63,20 +63,11 @@ else
 	printf "${RED}FAILURE: Failed to install pycharm-community.\n${NC}"
 fi
 #########################################################################################################
-#---------------- Add Atom PPA --------------------------------------------------------------------------
-if apt-get install pycharm-community ; then 
-	printf "${LIGHT_GREEN}Atom PPA ha been added.\n${NC}"
-else
-	printf "${RED}FAILURE: Failed to add atom PPA.\n${NC}"
-fi
-#---------------- Update Repositories -------------------------------------------------------------------
-if apt-get update ; then
-        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n${NC}"
-else
-        printf "${RED}FAILURE: apt-get update failed.\n${NC}"
-fi
+#---------------- Download Atom -------------------------------------------------------------------------
+printf "${LIGHT_BLUE}Downloading atom-amd64.deb\n${NC}"
+wget https://atom.io/download/deb
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
-if apt-get -y install atom ; then
+if apt-get -y install atom-amd64.deb ; then
 	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n${NC}"
 else
 	printf "${RED}FAILURE: Failed to install atom.\n${NC}"
