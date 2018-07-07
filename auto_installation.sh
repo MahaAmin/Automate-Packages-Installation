@@ -23,28 +23,55 @@ if sed 's/# deb/deb/' -i /etc/apt/sources.list ; then
 	printf "Done.\n"'"/etc/apt/sources.list"'" has been refreshed.\n"
 else
 	printf "Failed to refresh /etc/apt/sources.list"
-
+fi
 #########################################################################################################
 
 #---------- update repositories ---------------------------------------
-apt-get update
-
+if apt-get update ; then
+	printf "Done. apt-get update finished successfully\n"
+else
+	printf "FAILURE: apt-get update failed.\n"
+fi
 #########################################################################################################
 
 #---------------- Install R ------------------------------------------
-apt-get install r-base && echo "Done.\n 
+if apt-get install r-base ; then
+	printf "Done. R has been installed successfully.\n"
+else 
+	printf "FAILURE: apt-get install r-base failed.\n"
+fi
 
-# Download Rstudio
+#------------------ Download Rstudio ---------------------------------------------------------------------
+if [ -e rstudio-xenial-1.1.453-amd64.deb ]
+then
+	rm rstudio-xenial-1.1.453-amd64.deb;
+	printf "Old rstudio-xenial-1.1.453-amd64.deb has been deleted.\n"
+fi
+
 wget https://download1.rstudio.org/rstudio-xenial-1.1.453-amd64.deb
 
-# Install Rstudio
-dpkg -i rstudio-xenial-1.1.453-amd64.deb
+# Check integrity of rstudio-package
+CHECKSUM_REFRENCE="85b3e76c9fad4613bc9cf0de1f34b183"
+CHECKSUM_OUTPUT="$(md5sum rstudio-xenial-1.1.453-amd64.deb)"
 
-# Fix missed dependencies 
-apt-get -f install
+if [ "$CHECKSUM_OUTPUT" != "$CHECKSUM_REFRENCE" ] 
+then
+	wget -c https://download1.rstudio.org/rstudio-xenial-1.1.453-amd64.deb
+fi
 
-# Remove un-necessary packages
+#---------------------- Install Rstudio -----------------------------------------------------------------
+if [ "$CHECKSUM_OUTPUT" == "$CHECKSUM_REFRENCE" ]
+then
+	dpkg -i --force-all rstudio-xenial-1.1.453-amd64.deb
+fi
+#------------------- Fix missed dependencies -----------------------------------------------------------
+if apt-get -f install ; then 
+	printf "Done. Rstudio has been installed successfully.\n"
+fi
+
+#------------------- Remove un-necessary packages --------------------------------------------------------
 apt-get autoremove
+###############################################################################################################
 
 # Install python3.6
 #apt-get install python3.6
