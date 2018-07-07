@@ -44,7 +44,7 @@ else
 fi
 #########################################################################################################
 #---------------- Install Python3.6 ---------------------------------------------------------------------
-if apt-get install python3.6 ; then 
+if apt-get -y install python3.6 ; then 
 	printf "Done. python3.6 has been successfully installed.\n"
 else
 	printf "FAILURE: Failed to install python3.6\n"
@@ -63,7 +63,7 @@ else
         printf "FAILURE: apt-get update failed.\n"
 fi
 #---------------- Install Pycharm -----------------------------------------------------------------------
-if apt-get install pycharm-community ; then 
+if apt-get -y install pycharm-community ; then 
 	printf "Done. pycharm-community has been installed successfully.\n"
 else
 	printf "FAILURE: Failed to install pycharm-community.\n"
@@ -82,7 +82,7 @@ else
         printf "FAILURE: apt-get update failed.\n"
 fi
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
-if apt-get install atom ; then
+if apt-get -y install atom ; then
 	printf "Done. Atom has been installed successfully.\n"
 else
 	printf "FAILURE: Failed to install atom.\n"
