@@ -20,15 +20,15 @@ WHITE='\033[1;37m'
 
 #-------- Refresh software list as it may be an old distro --------------------------------------------
 if sed 's/# deb/deb/' -i /etc/apt/sources.list ; then
-	printf "Done.\n"'"/etc/apt/sources.list"'" has been refreshed.\n"
+	printf "${LIGHT_GREEN}Done.\n"'"/etc/apt/sources.list"'" has been refreshed.\n"
 else
-	printf "Failed to refresh /etc/apt/sources.list"
+	printf "${RED}Failed to refresh /etc/apt/sources.list"
 fi
 #########################################################################################################
 
 #---------- update repositories -------------------------------------------------------------------------
 if apt-get update ; then
-	printf "Done. apt-get update finished successfully\n"
+	printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
 else
 	printf "FAILURE: apt-get update failed.\n"
 fi
@@ -38,59 +38,53 @@ printf "Downloading google-chrome-stable_current_amd64.deb\n"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #---------------- Install Google-Chrome -----------------------------------------------------------------
 if dpkg -i --force-all google-chrome-stable_current_amd64.deb ; then 
-	printf "Google-Chrome has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Google-Chrome has been installed successfully.\n"
 else
 	printf "FAILURE: Failed to install google-chrome-stable_current_amd64.deb\n"
 fi
 #########################################################################################################
 #---------------- Install Python3.6 ---------------------------------------------------------------------
 if apt-get -y install python3.6 ; then 
-	printf "Done. python3.6 has been successfully installed.\n"
+	printf "${LIGHT_GREEN}Done. python3.6 has been successfully installed.\n"
 else
 	printf "FAILURE: Failed to install python3.6\n"
 fi
 #########################################################################################################
-#---------------- Add Pycharm PPA -----------------------------------------------------------------------
-if add-apt-repository ppa:mystic-mirage/pycharm ; then
-	printf "Pycharm PPA has been added.\n"
-else
-	printf "FAILURE: Failed to add pycharm PPA.\n"
-fi
 #---------------- Update Repositories -------------------------------------------------------------------
 if apt-get update ; then
-        printf "Done. apt-get update finished successfully\n"
+        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
 else
         printf "FAILURE: apt-get update failed.\n"
 fi
 #---------------- Install Pycharm -----------------------------------------------------------------------
-if apt-get -y install pycharm-community ; then 
-	printf "Done. pycharm-community has been installed successfully.\n"
+if snap install pycharm-community --classic ; then 
+	printf "${LIGHT_GREEN}Done. pycharm-community has been installed successfully.\n"
 else
 	printf "FAILURE: Failed to install pycharm-community.\n"
 fi
 #########################################################################################################
 #---------------- Add Atom PPA --------------------------------------------------------------------------
 if apt-get install pycharm-community ; then 
-	printf "Atom PPA ha been added.\n"
+	printf "${LIGHT_GREEN}Atom PPA ha been added.\n"
 else
 	printf "FAILURE: Failed to add atom PPA.\n"
 fi
 #---------------- Update Repositories -------------------------------------------------------------------
 if apt-get update ; then
-        printf "Done. apt-get update finished successfully\n"
+        printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n"
 else
         printf "FAILURE: apt-get update failed.\n"
 fi
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
 if apt-get -y install atom ; then
-	printf "Done. Atom has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n"
 else
 	printf "FAILURE: Failed to install atom.\n"
 fi
 #########################################################################################################
 #---------------- Install R -----------------------------------------------------------------------------
 if apt-get install r-base ; then
-	printf "Done. R has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. R has been installed successfully.\n"
 else 
 	printf "FAILURE: apt-get install r-base failed.\n"
 fi
@@ -119,7 +113,7 @@ then
 fi
 #------------------- Fix missed dependencies -----------------------------------------------------------
 if apt-get -f install ; then 
-	printf "Done. Rstudio has been installed successfully.\n"
+	printf "${LIGHT_GREEN}Done. Rstudio has been installed successfully.\n"
 fi
 
 #------------------- Remove un-necessary packages --------------------------------------------------------
