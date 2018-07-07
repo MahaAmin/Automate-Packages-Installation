@@ -56,6 +56,9 @@ if apt-get update ; then
 else
         printf "${RED}FAILURE: apt-get update failed.\n${NC}"
 fi
+#---------------- Download Pycharm ----------------------------------------------------------------------
+printf "${LIGHT_BLUE}Downloading pycharm-community.\n${NC}"
+wget -c --retry-connrefused --tries=0 --timeout=5 https://download.jetbrains.com/python/pycharm-community-2018.1.4.tar.gz
 #---------------- Install Pycharm -----------------------------------------------------------------------
 if snap install pycharm-community --classic ; then 
 	printf "${LIGHT_GREEN}Done. pycharm-community has been installed successfully.\n${NC}"
@@ -67,7 +70,7 @@ fi
 printf "${LIGHT_BLUE}Downloading atom-amd64.deb\n${NC}"
 wget -c --retry-connrefused --tries=0 --timeout=5 https://atom.io/download/deb
 #---------------- Install Atom-Text-Editor --------------------------------------------------------------
-if apt-get -y install atom-amd64.deb ; then
+if apt-get -y install deb ; then
 	printf "${LIGHT_GREEN}Done. Atom has been installed successfully.\n${NC}"
 else
 	printf "${RED}FAILURE: Failed to install atom.\n${NC}"
