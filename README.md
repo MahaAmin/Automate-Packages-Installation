@@ -26,6 +26,12 @@ Run the script with **sudo** :
 $ sudo ./auto_installation.sh
 ```
 
+## Features:
+- Automatic download of packages not included in ubuntu software repositories.
+- Resume broken downloads due to network interruption.
+- Automatically accepts installation requests (Y/n).
+
+
 ### Notes:
  - Make sure you have strong and stable network access, as the script performs several downloads and updates.
  - Old versions of ubuntu may encounter problems due to un-supported ubuntu package management.
@@ -40,5 +46,4 @@ Here are some issues that need your help:
   - Create checklist menu to choose which packages the user wants to be installed.
   - Test the script on more distros, report bugs.
   - Extend its functionality to support rpm packages.
-
 
