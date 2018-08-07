@@ -18,14 +18,6 @@ LIGHT_PURPLE='\033[1;35m'
 LIGHT_CYAN='\033[1;36m'
 WHITE='\033[1;37m'
 NC='\033[0m'
-#-------- Refresh software list as it may be an old distro --------------------------------------------
-if sed 's/# deb/deb/' -i /etc/apt/sources.list ; then
-	printf "${LIGHT_GREEN}Done. "'"/etc/apt/sources.list"'" has been refreshed.\n${NC}"
-else
-	printf "${RED}Failed to refresh /etc/apt/sources.list.\n${NC}"
-fi
-#########################################################################################################
-
 #---------- update repositories -------------------------------------------------------------------------
 if apt-get update ; then
 	printf "${LIGHT_GREEN}Done. apt-get update finished successfully\n${NC}"
